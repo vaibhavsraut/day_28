@@ -29,6 +29,15 @@ public class AddressBookMain {
 
         addressBook.addContact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
+        System.out.print("Enter First Name of the contact to edit: ");
+        String editFirstName = scanner.nextLine();
+        System.out.print("Enter Last Name of the contact to edit: ");
+        String editLastName = scanner.nextLine();
+
+        addressBook.editContact(editFirstName, editLastName);
+
+        addressBook.displayContacts();
+
         addressBook.displayContacts();
 
         scanner.close();
