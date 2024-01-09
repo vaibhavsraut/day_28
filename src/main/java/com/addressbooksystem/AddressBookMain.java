@@ -55,7 +55,15 @@ public class AddressBookMain {
         addressBook.addMultipleContacts();
 
         addressBook.sortContactsByName();
+        addressBook.displayContacts();
 
+        addressBook.sortContactsByCity();
+        addressBook.displayContacts();
+
+        addressBook.sortContactsByState();
+        addressBook.displayContacts();
+
+        addressBook.sortContactsByZip();
         addressBook.displayContacts();
 
 

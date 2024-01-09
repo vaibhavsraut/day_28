@@ -156,6 +156,25 @@ public class AddressBook {
                 .collect(Collectors.toList());
     }
 
+    public void sortContactsByCity() {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getCity))
+                .collect(Collectors.toList());
+    }
+
+    public void sortContactsByState() {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getState))
+                .collect(Collectors.toList());
+    }
+
+    public void sortContactsByZip() {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getZip))
+                .collect(Collectors.toList());
+    }
+
+
     public void displayContacts() {
         System.out.println("Contacts:");
         for (Contact contact : contacts) {
