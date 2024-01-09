@@ -1,5 +1,6 @@
 package com.addressbooksystem;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -172,6 +173,24 @@ public class AddressBook {
         contacts = contacts.stream()
                 .sorted(Comparator.comparing(Contact::getZip))
                 .collect(Collectors.toList());
+    }
+
+    public void writeToFile(String fileName) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            objectOutputStream.writeObject(contacts);
+            System.out.println("Data written to file successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readFromFile(String fileName) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+            contacts = (List<Contact>) objectInputStream.readObject();
+            System.out.println("Data read from file successfully.");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -66,6 +66,12 @@ public class AddressBookMain {
         addressBook.sortContactsByZip();
         addressBook.displayContacts();
 
+        addressBook.writeToFile("addressBookData.txt");
+
+        addressBook.readFromFile("addressBookData.txt");
+
+        addressBook.displayContacts();
+
 
         scanner.close();
     }
