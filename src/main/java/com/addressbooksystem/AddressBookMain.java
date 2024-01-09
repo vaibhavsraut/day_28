@@ -36,9 +36,15 @@ public class AddressBookMain {
 
         addressBook.editContact(editFirstName, editLastName);
 
-        addressBook.displayContacts();
+        System.out.print("Enter First Name of the contact to delete: ");
+        String deleteFirstName = scanner.nextLine();
+        System.out.print("Enter Last Name of the contact to delete: ");
+        String deleteLastName = scanner.nextLine();
+
+        addressBook.deleteContact(deleteFirstName, deleteLastName);
 
         addressBook.displayContacts();
+
 
         scanner.close();
     }
