@@ -43,6 +43,8 @@ public class AddressBookMain {
 
         addressBook.deleteContact(deleteFirstName, deleteLastName);
 
+        addressBook.addMultipleContacts();
+
         addressBook.displayContacts();
 
 
