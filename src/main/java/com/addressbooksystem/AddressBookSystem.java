@@ -52,6 +52,18 @@ public class AddressBookSystem {
                 }));
     }
 
+    public Map<String, Long> getContactCountByCity() {
+        return addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getCityPersonMap().keySet().stream())
+                .collect(Collectors.groupingBy(city -> city, Collectors.counting()));
+    }
+
+    public Map<String, Long> getContactCountByState() {
+        return addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getStatePersonMap().keySet().stream())
+                .collect(Collectors.groupingBy(state -> state, Collectors.counting()));
+    }
+
     public void displayAddressBooks() {
         System.out.println("Address Books:");
         for (String addressBookName : addressBooks.keySet()) {

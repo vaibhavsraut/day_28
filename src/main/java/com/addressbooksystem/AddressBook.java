@@ -142,6 +142,14 @@ public class AddressBook {
                 .collect(Collectors.toList());
     }
 
+    public long getContactCountByCity(String city) {
+        return cityPersonMap.getOrDefault(city, Collections.emptyList()).size();
+    }
+
+    public long getContactCountByState(String state) {
+        return statePersonMap.getOrDefault(state, Collections.emptyList()).size();
+    }
+
     public void displayContacts() {
         System.out.println("Contacts:");
         for (Contact contact : contacts) {
