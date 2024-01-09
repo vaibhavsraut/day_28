@@ -109,6 +109,18 @@ public class AddressBook {
         System.out.println("Contact not found.");
     }
 
+    public List<Contact> searchPersonByCity(String city) {
+        return contacts.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+    }
+
+    public List<Contact> searchPersonByState(String state) {
+        return contacts.stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(state))
+                .collect(Collectors.toList());
+    }
+
     public void displayContacts() {
         System.out.println("Contacts:");
         for (Contact contact : contacts) {
