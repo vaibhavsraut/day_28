@@ -6,9 +6,18 @@ public class AddressBookMain {
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
 
-        AddressBook addressBook = new AddressBook();
+        AddressBookSystem addressBookSystem = new AddressBookSystem();
 
         Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the name of the new Address Book: ");
+        String newAddressBookName = scanner.nextLine();
+
+        addressBookSystem.addAddressBook(newAddressBookName);
+
+        addressBookSystem.displayAddressBooks();
+
+        AddressBook addressBook = new AddressBook();
 
         System.out.print("Enter First Name: ");
         String firstName = scanner.nextLine();
