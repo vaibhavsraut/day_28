@@ -54,6 +54,8 @@ public class AddressBookMain {
 
         addressBook.addMultipleContacts();
 
+        addressBook.sortContactsByName();
+
         addressBook.displayContacts();
 
 

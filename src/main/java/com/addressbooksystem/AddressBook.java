@@ -150,6 +150,12 @@ public class AddressBook {
         return statePersonMap.getOrDefault(state, Collections.emptyList()).size();
     }
 
+    public void sortContactsByName() {
+        contacts = contacts.stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
     public void displayContacts() {
         System.out.println("Contacts:");
         for (Contact contact : contacts) {
