@@ -1,9 +1,6 @@
 package com.addressbooksystem;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookSystem {
@@ -35,11 +32,32 @@ public class AddressBookSystem {
                 .collect(Collectors.toList());
     }
 
+    public Map<String, List<Contact>> getAllPersonsByCity() {
+        return addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getCityPersonMap().entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (list1, list2) -> {
+                    List<Contact> mergedList = new ArrayList<>(list1);
+                    mergedList.addAll(list2);
+                    return mergedList;
+                }));
+    }
+
+    public Map<String, List<Contact>> getAllPersonsByState() {
+        return addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getStatePersonMap().entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (list1, list2) -> {
+                    List<Contact> mergedList = new ArrayList<>(list1);
+                    mergedList.addAll(list2);
+                    return mergedList;
+                }));
+    }
+
     public void displayAddressBooks() {
         System.out.println("Address Books:");
         for (String addressBookName : addressBooks.keySet()) {
             System.out.println(addressBookName);
         }
     }
+
 }
 

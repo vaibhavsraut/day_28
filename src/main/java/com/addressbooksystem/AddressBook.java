@@ -1,15 +1,17 @@
 package com.addressbooksystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook {
     private List<Contact> contacts;
+    private Map<String, List<Contact>> cityPersonMap;
+    private Map<String, List<Contact>> statePersonMap;
 
     public AddressBook() {
         this.contacts = new ArrayList<>();
+        this.cityPersonMap = new HashMap<>();
+        this.statePersonMap = new HashMap<>();
     }
 
     public boolean isDuplicate(Contact newContact) {
@@ -29,6 +31,25 @@ public class AddressBook {
         } else {
             System.out.println("Duplicate entry. Contact with the same name already exists.");
         }
+
+        cityPersonMap.computeIfAbsent(city, k -> new ArrayList<>()).add(newContact);
+        statePersonMap.computeIfAbsent(state, k -> new ArrayList<>()).add(newContact);
+    }
+
+    public Map<String, List<Contact>> getCityPersonMap() {
+        return cityPersonMap;
+    }
+
+    public Map<String, List<Contact>> getStatePersonMap() {
+        return statePersonMap;
+    }
+
+    public List<Contact> getPersonsByCity(String city) {
+        return cityPersonMap.getOrDefault(city, Collections.emptyList());
+    }
+
+    public List<Contact> getPersonsByState(String state) {
+        return statePersonMap.getOrDefault(state, Collections.emptyList());
     }
 
     public void addMultipleContacts() {
