@@ -3,6 +3,7 @@ package com.addressbooksystem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     private List<Contact> contacts;
@@ -11,9 +12,23 @@ public class AddressBook {
         this.contacts = new ArrayList<>();
     }
 
+    public boolean isDuplicate(Contact newContact) {
+        List<Contact> duplicateContacts = contacts.stream()
+                .filter(contact -> contact.equals(newContact))
+                .collect(Collectors.toList());
+
+        return !duplicateContacts.isEmpty();
+    }
+
     public void addContact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
         Contact newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        contacts.add(newContact);
+
+        if (!isDuplicate(newContact)) {
+            contacts.add(newContact);
+            System.out.println("Contact added successfully.");
+        } else {
+            System.out.println("Duplicate entry. Contact with the same name already exists.");
+        }
     }
 
     public void addMultipleContacts() {
