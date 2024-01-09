@@ -76,6 +76,10 @@ public class AddressBookMain {
 
         addressBook.displayContacts();
 
+        addressBook.writeToJson("addressBookData.json");
+
+        addressBook.readFromJson("addressBookData.json");
+
         addressBook.displayContacts();
 
 

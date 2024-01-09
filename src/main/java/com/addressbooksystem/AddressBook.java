@@ -1,5 +1,7 @@
 package com.addressbooksystem;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
@@ -7,6 +9,7 @@ import com.opencsv.CSVWriterBuilder;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -240,6 +243,27 @@ public class AddressBook {
 
             System.out.println("Data read from CSV file successfully.");
         } catch (IOException | CsvException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeToJson(String fileName) {
+        try (Writer writer = new FileWriter(fileName)) {
+            Gson gson = new Gson();
+            gson.toJson(contacts, writer);
+            System.out.println("Data written to JSON file successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readFromJson(String fileName) {
+        try (Reader reader = new FileReader(fileName)) {
+            Gson gson = new Gson();
+            Type contactListType = new TypeToken<List<Contact>>() {}.getType();
+            contacts = gson.fromJson(reader, contactListType);
+            System.out.println("Data read from JSON file successfully.");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
