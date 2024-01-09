@@ -70,6 +70,12 @@ public class AddressBookMain {
 
         addressBook.readFromFile("addressBookData.txt");
 
+        addressBook.writeToCSV("addressBookData.csv");
+
+        addressBook.readFromCSV("addressBookData.csv");
+
+        addressBook.displayContacts();
+
         addressBook.displayContacts();
 
 

@@ -1,5 +1,11 @@
 package com.addressbooksystem;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriter;
+import com.opencsv.CSVWriterBuilder;
+import com.opencsv.exceptions.CsvException;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -193,6 +199,50 @@ public class AddressBook {
         }
     }
 
+    public void writeToCSV(String fileName) {
+        try (Writer writer = new FileWriter(fileName);
+             CSVWriter csvWriter = (CSVWriter) new CSVWriterBuilder(writer)
+                     .withSeparator(',')
+                     .withQuoteChar(CSVWriter.NO_QUOTE_CHARACTER)
+                     .build()) {
+
+            List<String[]> data = new ArrayList<>();
+            for (Contact contact : contacts) {
+                data.add(new String[]{contact.getFirstName(), contact.getLastName(), contact.getAddress(),
+                        contact.getCity(), contact.getState(), contact.getZip(), contact.getPhoneNumber(), contact.getEmail()});
+            }
+
+            csvWriter.writeAll(data);
+            System.out.println("Data written to CSV file successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readFromCSV(String fileName) {
+        try (Reader reader = new FileReader(fileName);
+             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build()) {
+
+            List<String[]> data = csvReader.readAll();
+            for (String[] row : data) {
+                String firstName = row[0];
+                String lastName = row[1];
+                String address = row[2];
+                String city = row[3];
+                String state = row[4];
+                String zip = row[5];
+                String phoneNumber = row[6];
+                String email = row[7];
+
+                Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                contacts.add(contact);
+            }
+
+            System.out.println("Data read from CSV file successfully.");
+        } catch (IOException | CsvException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void displayContacts() {
         System.out.println("Contacts:");
